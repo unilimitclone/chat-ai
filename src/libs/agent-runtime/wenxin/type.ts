@@ -59,6 +59,10 @@ export interface RespBase {
 
 export interface ChatResp extends RespBase {
   /**
+   * 当 need_clear_history 为 true 时，此字段会告知第几轮对话有敏感信息，如果是当前问题，ban_round=-1
+   */
+  ban_round: number;
+  /**
    * 输出内容标识，说明：
    * · normal：输出内容完全由大模型生成，未触发截断、替换
    * · stop：输出结果命中入参stop中指定的字段后被截断
@@ -66,10 +70,6 @@ export interface ChatResp extends RespBase {
    * · content_filter：输出内容被截断、兜底、替换为**等
    */
   finish_reason: string;
-  /**
-   * 当 need_clear_history 为 true 时，此字段会告知第几轮对话有敏感信息，如果是当前问题，ban_round=-1
-   */
-  ban_round: number;
   /**
    * 当前生成的结果是否被截断
    */
